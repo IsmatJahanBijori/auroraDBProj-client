@@ -4,6 +4,8 @@ import Main from "../Layout/Main";
 import LoginLayout from "../Layout/LoginLayout";
 import Login from "../pages/Login/Login";
 import Signup from "../pages/Signup/Signup";
+import About from "../pages/About/About";
+import Catalog from "../pages/Catalog/Catalog";
 
 export const router = createBrowserRouter([
     {
@@ -13,7 +15,15 @@ export const router = createBrowserRouter([
         {
             path: "/",
             element: <Home/>
-        }
+        },
+        {
+            path: "/about",
+            element: <About/>
+        },
+        {
+            path: "/catalog",
+            element: <Catalog/>
+        },
       ]
     },
     {

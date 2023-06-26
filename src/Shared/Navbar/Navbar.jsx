@@ -24,7 +24,7 @@ const Navbar = () => {
             <Link to="/" className="mr-3">
                 Home
             </Link>
-            <Link to="/" className="mr-3">
+            <Link to="/catalog" className="mr-3">
                 Product Catalog
             </Link>
             <Link to="/" className="mr-3">
@@ -44,7 +44,7 @@ const Navbar = () => {
                         </Link>
                         <Link to="/" className="mr-3">
                             <label tabIndex={0} className="btn btn-ghost">
-                                <img src={user?.photoURL} className="w-8 h-8 rounded-full" alt="" />
+                                <img src={user.photoURL} className="w-8 h-8 rounded-full" alt="" />
                             </label>
                         </Link>
                     </React.Fragment> :
