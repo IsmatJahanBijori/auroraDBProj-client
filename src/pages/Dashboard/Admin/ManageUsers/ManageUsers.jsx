@@ -1,12 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { FaUserTag } from "react-icons/fa";
-import {
-    useQuery,
-    useMutation,
-    useQueryClient,
-    QueryClient,
-    QueryClientProvider,
-} from '@tanstack/react-query'
+import { useQuery } from '@tanstack/react-query'
 const ManageUsers = () => {
     // const [users, setUsers] = useState([])
     // useEffect(() => {
@@ -16,6 +10,10 @@ const ManageUsers = () => {
         const res = await fetch('http://localhost:5000/users')
         return res.json()
     })
+
+    const handleAdmin=(id)=>{
+
+    }
     return (
         <div>
             <h2 className='text-4xl my-3 text-center'>Manage Users</h2>
@@ -39,8 +37,7 @@ const ManageUsers = () => {
                                     <th>{index + 1}</th>
                                     <td>{user.name}</td>
                                     <td>{user.email}</td>
-
-                                    <td>{user.role === 'admin' ? 'admin' : <button onClick={() => handleAdmin(user)} className='button1 btn btn-active btn-ghost my-1'><FaUserTag />Make Admin</button>}</td>
+                                    <td>{user.role === 'admin' ? 'admin' : <button onClick={() => handleAdmin(id)} className='button1 btn btn-active btn-ghost my-1'><FaUserTag />Make Admin</button>}</td>
                                 </tr>
                             )
                         }
