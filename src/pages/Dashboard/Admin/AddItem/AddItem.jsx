@@ -1,32 +1,61 @@
 import React from 'react';
 import { useForm } from "react-hook-form";
 import Swal from 'sweetalert2';
+const img_api = import.meta.env.VITE_img_api_key
+console.log(img_api)
+
 
 const AddItem = () => {
-    const { register, handleSubmit, watch, formState: { errors } } = useForm();
+    const { register, handleSubmit, reset, formState: { errors } } = useForm();
+
+    const img_url = `https://api.imgbb.com/1/upload?key=${img_api}`
+
     const onSubmit = data => {
         console.log(data)
-        
-        fetch('http://localhost:5000/books', {
+
+        const formData = new FormData()
+        formData.append("image", data.image[0])
+
+
+        fetch(img_url, {
             method: 'POST',
-            headers: {
-                'content-type': 'application/json'
-            },
-            body: JSON.stringify(data)
+            body: formData
         })
-        .then(res=>res.json())
-        .then(data=>{
-            console.log(data)
-        if(data.insertedId){
-            Swal.fire({
-                position: 'top-end',
-                icon: 'success',
-                title: 'Product added successfully',
-                showConfirmButton: false,
-                timer: 1500
+            .then(res => res.json())
+            .then(imgData => {
+                // console.log(imgData.data)
+                if (imgData.success) {
+                    const imgURL = imgData.data.display_url;
+                    const { title, subtitle, price } = data
+                    const newItem = {
+                        title, subtitle, price: parseFloat(price), image: imgURL
+                    }
+                    fetch('http://localhost:5000/books', {
+                        method:"POST",
+                        headers:{
+                            'content-type':'application/json'
+                        },
+                        body:JSON.stringify(newItem)
+                    })
+                    .then(res=>res.json())
+                    .then(data=>{
+                        console.log(data)
+                        if(data.insertedId){
+                            reset()
+                            Swal.fire({
+                                position: 'top-end',
+                                icon: 'success',
+                                title: 'Item added successfully',
+                                showConfirmButton: false,
+                                timer: 1500
+                              })
+                        }
+                    })
+                }
             })
-        }})
     }
+
+
     return (
         <div className="hero min-h-screen bg-slate-100">
             <div className="card w-[500px] shadow-2xl bg-base-100 ">
