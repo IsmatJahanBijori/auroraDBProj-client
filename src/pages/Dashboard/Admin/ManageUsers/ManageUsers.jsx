@@ -1,6 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import { FaUserTag } from "react-icons/fa";
 import { useQuery } from '@tanstack/react-query'
+import { useContext } from 'react';
+import { AuthContext } from '../../../../Provider/AuthProvider';
+import Swal from 'sweetalert2';
 const ManageUsers = () => {
     // const [users, setUsers] = useState([])
     // useEffect(() => {
@@ -10,9 +13,30 @@ const ManageUsers = () => {
         const res = await fetch('http://localhost:5000/users')
         return res.json()
     })
+    // const { user } = useContext(AuthContext)
 
-    const handleAdmin=(id)=>{
-
+    const handleAdmin = (user) => {
+        if (user) {
+            fetch(`http://localhost:5000/users/admin/${user._id}`,
+                {
+                    method: 'PATCH'
+                }
+            )
+                .then(res => res.json())
+                .then(data => {
+                    console.log(data)
+                    if (data.modifiedCount) {
+                        refetch()
+                        Swal.fire({
+                            position: 'top-center',
+                            icon: 'success',
+                            title: `${user.name} is admin now`,
+                            showConfirmButton: false,
+                            timer: 1500
+                        })
+                    }
+                })
+        }
     }
     return (
         <div>
@@ -37,7 +61,7 @@ const ManageUsers = () => {
                                     <th>{index + 1}</th>
                                     <td>{user.name}</td>
                                     <td>{user.email}</td>
-                                    <td>{user.role === 'admin' ? 'admin' : <button onClick={() => handleAdmin(id)} className='button1 btn btn-active btn-ghost my-1'><FaUserTag />Make Admin</button>}</td>
+                                    <td>{user.role === 'Admin' ? 'Admin' : <button onClick={() => handleAdmin(user)} className='button1 btn btn-active btn-ghost my-1'><FaUserTag />Make Admin</button>}</td>
                                 </tr>
                             )
                         }

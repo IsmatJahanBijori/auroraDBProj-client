@@ -11,6 +11,7 @@ import Dashboard from "../Layout/Dashboard";
 import ManageUsers from "../pages/Dashboard/Admin/ManageUsers/ManageUsers";
 import AddItem from "../pages/Dashboard/Admin/AddItem/AddItem";
 import UpdateItem from "../pages/Dashboard/Admin/UpdateItem/UpdateItem";
+import PrivateRoute from "../Provider/PrivateRoute";
 
 export const router = createBrowserRouter([
     {
@@ -31,7 +32,7 @@ export const router = createBrowserRouter([
         },
         {
             path: "/books/:id",
-            element: <SingleBook/>,
+            element: <PrivateRoute><SingleBook/></PrivateRoute>,
             loader:({params})=>fetch(`http://localhost:5000/books/${params.id}`)
         },
       ]

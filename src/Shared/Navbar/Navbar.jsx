@@ -7,14 +7,15 @@ const Navbar = () => {
     const { user, logOut } = useContext(AuthContext)
     const handleLogout = () => {
         logOut()
-            .then(() => {  
+            .then(() => {
                 Swal.fire({
-                position: 'top-end',
-                icon: 'success',
-                title: 'Successfully user logout!',
-                showConfirmButton: false,
-                timer: 1500
-              })})
+                    position: 'top-end',
+                    icon: 'success',
+                    title: 'Successfully user logout!',
+                    showConfirmButton: false,
+                    timer: 1500
+                })
+            })
             .catch(error => { console.log(error.message) })
     }
 
@@ -42,11 +43,19 @@ const Navbar = () => {
                         <Link onClick={handleLogout} to="/" className="mr-3">
                             Logout
                         </Link>
-                        <Link to="/" className="mr-3">
-                            <label tabIndex={0} className="btn btn-ghost">
-                                <img src={user.photoURL} className="w-8 h-8 rounded-full" alt="" />
-                            </label>
-                        </Link>
+                        {
+                            user ? (
+                                <Link to="/" className="mr-3">
+                                    <label tabIndex={0} className="btn btn-ghost">
+                                        <img src={user.photoURL} className="w-8 h-8 rounded-full" alt="" />
+                                    </label>
+                                </Link>
+                            ) : (<Link to="/" className="mr-3">
+                                <label tabIndex={0} className="btn btn-ghost">
+                                    <img src="https://i.ibb.co/XXrxqkq/default-user-image.png" className="w-8 h-8 rounded-full" alt="" />
+                                </label>
+                            </Link>)
+                        }
                     </React.Fragment> :
                     <React.Fragment>
                         <Link to="/login" className="mr-3">
@@ -64,6 +73,7 @@ const Navbar = () => {
         <div className="navbar bg-black text-white bg-opacity-40">
             <div className="navbar-start">
                 <div className="dropdown">
+                    {/* sm screen */}
                     <label tabIndex={0} className="btn btn-ghost">
                         <img src="https://i.ibb.co/30vSHtY/logo.jpg" className="w-8 h-8 rounded-full" alt="" />
                     </label>
@@ -76,6 +86,7 @@ const Navbar = () => {
                 </div>
                 <a className="btn btn-ghost normal-case text-xl">Aurora Shopping Center</a>
             </div>
+            {/* lg screen */}
             <div className="navbar-center hidden lg:flex">
                 <ul className="menu md:text-white  menu-horizontal px-1" style={{ fontFamily: "sans-serif", fontWeight: "300px", fontSize: "25px" }}>
                     {navItems}
