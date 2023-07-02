@@ -7,13 +7,17 @@ import {
 } from "react-router-dom";
 import { router } from './router/Router.jsx';
 import AuthProvider from './Provider/AuthProvider';
+import { QueryClientProvider, QueryClient, } from '@tanstack/react-query'
+const queryClient = new QueryClient()
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
     <AuthProvider>
-      <div style={{ fontFamily: "sans-serif", fontWeight: "300px", fontSize: "25px" }}>
-        <RouterProvider router={router} />
-      </div>
+      <QueryClientProvider client={queryClient}>
+        <div style={{ fontFamily: "sans-serif", fontWeight: "300px", fontSize: "25px" }}>
+          <RouterProvider router={router} />
+        </div>
+      </QueryClientProvider>
     </AuthProvider>
   </React.StrictMode>,
 )
