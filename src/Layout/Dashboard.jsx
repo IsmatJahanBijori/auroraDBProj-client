@@ -1,8 +1,12 @@
 import React from 'react';
 import { NavLink, Outlet } from 'react-router-dom';
+import useCart from '../hooks/useCart';
+// import useAdmin from '../hooks/useAdmin';
 // import '../index.css'
 const Dashboard = () => {
-    const isAdmin = true
+    // const [isAdmin] = useAdmin()
+    const isAdmin=false
+    const [cart]=useCart()
     return (
         <div className="drawer lg:drawer-open">
             <input id="my-drawer-2" type="checkbox" className="drawer-toggle" />
@@ -15,7 +19,8 @@ const Dashboard = () => {
                 <label htmlFor="my-drawer-2" className="drawer-overlay"></label>
                 <ul className="menu p-4 w-80 h-full bg-base-200">
                     {/* Sidebar content here */}
-                    {isAdmin ?
+                    {
+                        isAdmin ?
                         <React.Fragment>
                             <li><NavLink to='manageUsers' className="hover:text-blue-700 bg-slate-100 font-semibold">Manage Users</NavLink></li>
                             <li><NavLink to='addItem' className="hover:text-blue-700 bg-slate-100 font-semibold">Add Item</NavLink></li>
@@ -24,9 +29,10 @@ const Dashboard = () => {
                         :
 
                         <React.Fragment>
-                            <li><NavLink to='' className="hover:text-blue-700 bg-slate-100 font-semibold">Sidebar Item 1</NavLink></li>
-                            <li><NavLink to='' className="hover:text-blue-700 bg-slate-100 font-semibold">Sidebar Item 1</NavLink></li>
-                        </React.Fragment>}
+                            <li><NavLink to='carts' className="hover:text-blue-700 bg-slate-100 font-semibold">My Cart   <div className="badge badge-primary">{cart?.length || 0}</div>
+                            </NavLink></li>
+                        </React.Fragment>
+                    }
 
                     <hr className='w-full border-black my-5' />
 
@@ -35,7 +41,7 @@ const Dashboard = () => {
                         <li><NavLink to='/catalog' className="hover:text-blue-700 bg-slate-100 font-semibold">Product Catalog</NavLink></li>
                     </React.Fragment>
                 </ul>
-
+                {cart?.length || 0}
             </div>
         </div>
     );

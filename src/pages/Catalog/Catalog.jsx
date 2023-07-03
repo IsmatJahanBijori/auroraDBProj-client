@@ -15,7 +15,7 @@ const Catalog = () => {
             .then(res => res.json())
             .then(data => setCatalog(data))
     }, [])
-    console.log(catalog)
+    // console.log(catalog)
     return (
         <div className='grid grid-cols-1 md:grid-cols-3 text-center gap-10 mx-20 my-20'>
         {

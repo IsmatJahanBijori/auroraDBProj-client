@@ -2,7 +2,7 @@ import React from 'react';
 import { useForm } from "react-hook-form";
 import Swal from 'sweetalert2';
 const img_api = import.meta.env.VITE_img_api_key
-console.log(img_api)
+// console.log(img_api)
 
 
 const AddItem = () => {
@@ -61,7 +61,7 @@ const AddItem = () => {
             <div className="card w-[500px] shadow-2xl bg-base-100 ">
                 <div className="card-body">
                     <form onSubmit={handleSubmit(onSubmit)}>
-                        <h1 className="text-4xl">Add New item</h1>
+                        <h1 className="text-4xl mb-5">Add New item</h1>
 
                         {/**book image */}
                         <div className="form-control">

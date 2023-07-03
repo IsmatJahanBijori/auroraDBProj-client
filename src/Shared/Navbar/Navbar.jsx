@@ -19,7 +19,9 @@ const Navbar = () => {
             .catch(error => { console.log(error.message) })
     }
 
-
+//     <Link to="/carts" className="mr-3">
+//     Order
+// </Link>
     const navItems = (
         <React.Fragment>
             <Link to="/" className="mr-3">
@@ -28,18 +30,17 @@ const Navbar = () => {
             <Link to="/catalog" className="mr-3">
                 Product Catalog
             </Link>
-            <Link to="/" className="mr-3">
-                Order
-            </Link>
             <Link to="/dashboard" className="mr-3">
                 Dashboard
             </Link>
             <Link to="/about" className="mr-3">
                 About Us
             </Link>
+            
             {
                 user ?
                     <React.Fragment>
+                        
                         <Link onClick={handleLogout} to="/" className="mr-3">
                             Logout
                         </Link>
