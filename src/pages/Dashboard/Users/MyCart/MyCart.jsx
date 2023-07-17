@@ -60,7 +60,7 @@ const MyCart = () => {
                                 <tr key={item._id}>
                                     <th>{index + 1}</th>
                                     <td>{item.title}</td>
-                                    <td>{item.price}</td>
+                                    <td>$ {item.price}</td>
                                     <td>{<button onClick={() => handleDelete(item)} className='button1 btn btn-active btn-ghost my-1'><FaTrash /></button>}</td>
                                 </tr>
                             )

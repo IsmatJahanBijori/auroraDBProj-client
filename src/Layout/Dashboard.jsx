@@ -5,7 +5,7 @@ import useCart from '../hooks/useCart';
 // import '../index.css'
 const Dashboard = () => {
     // const [isAdmin] = useAdmin()
-    const isAdmin=false
+    const isAdmin=true
     const [cart]=useCart()
     return (
         <div className="drawer lg:drawer-open">
@@ -29,7 +29,7 @@ const Dashboard = () => {
                         :
 
                         <React.Fragment>
-                            <li><NavLink to='carts' className="hover:text-blue-700 bg-slate-100 font-semibold">My Cart   <div className="badge badge-primary">{cart?.length || 0}</div>
+                            <li><NavLink to='carts' className="hover:text-blue-700 bg-slate-100 font-semibold">My Cart   <span className="badge badge-primary w-8 h-8">{cart?.length || 0}</span>
                             </NavLink></li>
                         </React.Fragment>
                     }
