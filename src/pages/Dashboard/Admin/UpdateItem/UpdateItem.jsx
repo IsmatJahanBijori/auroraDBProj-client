@@ -4,21 +4,21 @@ import { useForm } from 'react-hook-form';
 const UpdateItem = () => {
     const { register, handleSubmit, reset, formState: { errors } } = useForm();
 
-    const onSubmit=(data)=>{
+    const onSubmit = (data) => {
         console.log(data)
         const { title, subtitle, price } = data
-                    const productItem = {
-                        title, subtitle, price: parseFloat(price)
-                    }
-        fetch(`http://localhost:5000/books/${id}`,{
+        const productItem = {
+            title, subtitle, price: parseFloat(price)
+        }
+        fetch(`http://localhost:5000/books/${id}`, {
             method: 'PUT',
-            headers:{
-                'content-type':'application/json'
+            headers: {
+                'content-type': 'application/json'
             },
-            body:JSON.stringify(productItem)
+            body: JSON.stringify(productItem)
         })
-        .then(res=>res.json())
-        .then(data=>console.log(data))
+            .then(res => res.json())
+            .then(data => console.log(data))
     }
 
     return (
@@ -36,15 +36,13 @@ const UpdateItem = () => {
                             <input type="file" {...register("image", { required: true })} className="file-input file-input-bordered file-input-info w-full max-w-xs" />
                         </div>
 
-                        {errors.image && <span className='text-red-300 mt-5'>This field is required</span>}
-
 
                         {/**Book Title */}
                         <div className="form-control">
                             <label className="label">
                                 <span className="label-text">Title</span>
                             </label>
-                            <input type="text" placeholder='Product Title' {...register("title", { required: true })} className="input input-bordered max-w-xs" />
+                            <input type="text" defaultValue={title} placeholder='Product Title' {...register("title", { required: true })} className="input input-bordered max-w-xs" />
                         </div>
                         {errors.title && <span className='text-red-300 mt-5'>This field is required</span>}
 
@@ -53,7 +51,7 @@ const UpdateItem = () => {
                             <label className="label">
                                 <span className="label-text">SubTitle</span>
                             </label>
-                            <input type="text" placeholder='Product SubTitle' {...register("subtitle", { required: true })} className="input input-bordered max-w-xs" />
+                            <input type="text" defaultValue={subtitle} placeholder='Product SubTitle' {...register("subtitle", { required: true })} className="input input-bordered max-w-xs" />
                         </div>
                         {errors.subtitle && <span className='text-red-300 mt-5'>This field is required</span>}
 
@@ -62,7 +60,7 @@ const UpdateItem = () => {
                             <label className="label">
                                 <span className="label-text">$ Price</span>
                             </label>
-                            <input type="number" {...register("price", { required: true })} placeholder="Price" className="input input-bordered max-w-xs" />
+                            <input type="number" defaultValue={price} {...register("price", { required: true })} placeholder="Price" className="input input-bordered max-w-xs" />
                         </div>
                         {errors.price && <span className='text-red-300 mt-5'>This field is required</span>}
 
@@ -78,3 +76,5 @@ const UpdateItem = () => {
 };
 
 export default UpdateItem;
+
+//newly added defaultValue

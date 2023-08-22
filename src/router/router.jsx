@@ -13,11 +13,15 @@ import AddItem from "../pages/Dashboard/Admin/AddItem/AddItem";
 import UpdateItem from "../pages/Dashboard/Admin/UpdateItem/UpdateItem";
 import PrivateRoute from "../Provider/PrivateRoute";
 import MyCart from "../pages/Dashboard/Users/MyCart/MyCart";
+import AdminRoute from "../Provider/AdminRoute";
+import ErrorPage from "../pages/ErrorPage/ErrorPage";
+import ManageItems from "../pages/Dashboard/Admin/ManageItems/ManageItems";
 
 export const router = createBrowserRouter([
   {
     path: "/",
     element: <Main />,
+    errorElement: <ErrorPage />,
     children: [
       {
         path: "/",
@@ -62,15 +66,22 @@ export const router = createBrowserRouter([
     children: [
       {
         path: 'manageUsers',
-        element: <ManageUsers />
+        element: <AdminRoute><ManageUsers /></AdminRoute>
       },
       {
         path: 'addItem',
-        element: <AddItem />
+        element: <AdminRoute><AddItem /></AdminRoute>
       },
       {
-        path: 'updateItem',
-        element: <UpdateItem />
+        path: 'manageItems',
+        element: <AdminRoute><ManageItems /></AdminRoute>,
+        // children: [
+        //   {
+        //     path: 'updateItem/:id',
+        //     element: <UpdateItem />,
+        //     loader:({ params }) => fetch(`http://localhost:5000/books/${params.id}`)
+        //   },
+        // ]
       },
       {
         path: "carts",
